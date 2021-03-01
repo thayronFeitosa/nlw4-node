@@ -1,9 +1,12 @@
-import express, { request, response } from 'express';
+import express, { Request, Response } from 'express';
+import './database';
+import { router } from './router/router';
 
 const app = express();
 
-app.get('/', (request, response) => {
-  return response.json({message: 'hello word - NLW04'});
-});
+app.use(express.json());
+app.use(router);
 
-app.listen(3333, () => console.log('servidor rodando na porta'));
+const PORT = '3333';
+
+app.listen(3333, () => console.log(`servidor rodando na porta 3333 ${PORT} 🚀️`));
