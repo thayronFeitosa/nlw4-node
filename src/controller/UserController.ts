@@ -1,26 +1,26 @@
 import { Request, Response } from 'express';
-import { getRepository } from 'typeorm';
-import { User } from '../models/User';
+import { getCustomRepository } from 'typeorm';
+import { UserRepository } from '../repositories/UsersRepository';
 
 class UserController {
-  async create (request: Request, response: Response) {
+  async create(request: Request, response: Response) {
     try {
       const { name, email } = request.body;
-      const usersRepository = getRepository(User);
+      const usersRepository = getCustomRepository(UserRepository)
 
       const userAlreadyExists = await usersRepository.findOne({
         email: email
       });
 
-      if(!email || !name) {
+      if (!email || !name) {
         return response.status(400).json({ error: 'no body informed' });
       };
 
-      if(userAlreadyExists) {
+      if (userAlreadyExists) {
         return response.status(400).json({ error: 'user already exists!' });
       };
 
-      const user =usersRepository.create({
+      const user = usersRepository.create({
         name,
         email
       });
