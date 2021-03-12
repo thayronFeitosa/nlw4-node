@@ -14,7 +14,16 @@ class SurveysController {
       description
     });
     await surveysReposytory.save(survey);
-    response.status(201).json({sucess: 'Survey craeted sucefull', survey: survey});
+    response.status(201).json(survey);
+  }
+
+  async show(request: Request, response: Response) {
+    const surveysReposytory = getCustomRepository(SurveyRepository);
+    
+    const allSurveys = await surveysReposytory.find(); // muito importante o await para retornar os dados do banco
+
+    return response.status(200).json(allSurveys);
+
   }
 }
 
