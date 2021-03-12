@@ -5,7 +5,7 @@ export class CreateSurveys1615551129187 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'Surveys',
+        name: 'surveys',
         columns: [
           {
             name: 'id',
@@ -23,9 +23,9 @@ export class CreateSurveys1615551129187 implements MigrationInterface {
             type: 'varchar',
           },
           {
-            name: 'create_at',
-            type: 'timestamp',
-            default: 'now()',
+            name: "create_at",
+            type: "datetime",
+            default: "now()"
           }
         ]
       })
@@ -34,7 +34,7 @@ export class CreateSurveys1615551129187 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('Surveys')
+    await queryRunner.dropTable('surveys')
   }
 
 }
