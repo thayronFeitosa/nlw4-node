@@ -22,7 +22,7 @@ class SurveysController {
     
     const allSurveys = await surveysReposytory.find(); // muito importante o await para retornar os dados do banco
 
-    return response.status(200).json(allSurveys);
+    return response.status(201).json(allSurveys);
 
   }
 }

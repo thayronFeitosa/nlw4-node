@@ -6,8 +6,14 @@ import createConnection from '../database';
 describe("surveys", () => {
   beforeAll(async () => {
     const connection = await createConnection();
-    await connection.dropDatabase();
+    await connection.query('DELETE FROM surveys');
     await connection.runMigrations();
+  });
+
+  afterAll(async () => {
+    const connection = await createConnection();
+    await connection.dropDatabase();
+    await connection.close();
   });
 
   it("Shout be able to create a new user", async () => {
@@ -28,7 +34,4 @@ describe("surveys", () => {
     expect(response.body.length).toBe(2);
 
   });
-
-  
-
 })

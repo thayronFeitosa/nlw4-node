@@ -6,7 +6,14 @@ import createConnection from '../database';
 describe("Users", () => {
   beforeAll(async () => {
     const connection = await createConnection();
+    await connection.query('DELETE FROM users');
     await connection.runMigrations();
+  });
+
+  afterAll(async () => {
+    const connection = await createConnection();
+    await connection.dropDatabase();
+    await connection.close();
   });
 
   it("Shout be able to create a new user", async () => {

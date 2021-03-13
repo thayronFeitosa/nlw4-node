@@ -28,7 +28,7 @@ class UserController {
       await usersRepository.save(user);
       return response.status(201).json(user);
     } catch (err) {
-      return response.json(500).json('err');
+      return response.json(400).json('err');
 
     }
   }
